@@ -6,7 +6,7 @@ class Form extends Component {
   // Setting the component's initial state
   state = {
     topic: "",
-    numRecords: "",
+    // numRecords: "",
     startYear:"",
     endYear:"",
     searchURL:"",
@@ -31,7 +31,6 @@ class Form extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
    // numResults = $("#num-records-select").val();
-
 
     // Alert the user their first and last name, clear `this.state.topic` and `this.state.numRecords`, clearing the inputs
     //alert(`Hello ${this.state.topic} ${this.state.numRecords}`);

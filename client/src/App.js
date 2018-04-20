@@ -12,15 +12,15 @@ class App extends Component {
   };
 
   // When this component mounts, search for the movie "The Matrix"
-  componentDidMount() {
-    this.searchNYT("matrix");
-  }
+  // componentDidMount() {
+  //   this.searchNYT("matrix");
+  // }
 
-  searchNYT = query => {
-    API.search(query)
-      .then(res => this.setState({ result: res.data.response.docs }))
-      .catch(err => console.log(err));
-  };
+  // searchNYT = query => {
+  //   API.search(query)
+  //     .then(res => this.setState({ result: res.data.response.docs }))
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
 
