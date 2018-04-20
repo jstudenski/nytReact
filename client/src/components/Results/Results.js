@@ -6,9 +6,10 @@ import './Results.css';
 const Results = props => (
 
   <div>
-    <h3>HERE</h3>
+    <h3>{props.title}</h3>
    {/* // <h1>{props.articles}</h1> */}
-    {props.children}
+    
+    {props.href}
   </div>
 
 
