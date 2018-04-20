@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import './Results.css';
 
-class Results extends Component {
-  render() {
-    return (
-      <h2>Results here...</h2>
-    );
-  }
+
+
+const Results = props => (
+
+  <div>
+    <h3>HERE</h3>
+   {/* // <h1>{props.articles}</h1> */}
+    {props.children}
+  </div>
+
+
+);
+
+
+
+
+// class Results extends Component {
+//   render() {
+//     return (
+//       <h2>Results here...</h2>
+//     );
+//   }
 
 
   // // Setting the component's initial state
@@ -82,7 +98,10 @@ class Results extends Component {
   //       </form>
   //     </div>
   //   );
+
+
+
   // }
-}
+// }
 
 export default Results;

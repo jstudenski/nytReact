@@ -3,9 +3,31 @@ import './App.css';
 import Section from './components/Section';
 import Form from './components/Form';
 import Results from './components/Results';
+import API from './utils/API';
 
 class App extends Component {
+  state = {
+    result: {},
+    search: ""
+  };
+
+  // When this component mounts, search for the movie "The Matrix"
+  componentDidMount() {
+    this.searchMovies("matrix");
+  }
+
+  searchMovies = query => {
+    API.search(query)
+      .then(res => this.setState({ result: res.data.response.docs }))
+      // .then(res => console.log(res.data.response.docs))
+      .catch(err => console.log(err));
+      
+     // console.log(this.state.result)
+  };
+
   render() {
+    console.log(this.state.result[0])
+
     return (
       <div className="App">
         <header className="App-header">
@@ -13,8 +35,11 @@ class App extends Component {
         </header>
 
         <Section title="Search"><Form /></Section>,
-        <Section title="Results"><Results /></Section>,
-        <Section title="Saved Articles"></Section>
+        <Section title="Results"><Results articles={[this.state.result]}/></Section>,
+        <Section title="Saved Articles"></Section>,
+        <Section title={ "Search for a Movie to Begin"}></Section>
+{/* this.state.result[0] ||*/}
+
         {/* <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p> */}
