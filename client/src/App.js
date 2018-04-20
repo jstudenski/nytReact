@@ -32,34 +32,18 @@ class App extends Component {
         </header>
 
         <Section title="Search"><Form /></Section>,
-        {/* <Section title="Results"><Results articles={[this.state.result]}/></Section>, */}
         <Section title="Results">
-        
-                  {this.state.result.map(result => {
-                    return (
-                      <Results
-                        key={result.web_url}
-                        title={result.headline.main}
-                        href={result.web_url}
-                      />
-                    );
-                  })}
-        
+          {this.state.result.map(result => {
+            return (
+              <Results
+                key={result.web_url}
+                title={result.headline.main}
+                href={result.web_url}
+              />
+            );
+          })}
         </Section>,
-
-             
-
-      
-
-
-
         <Section title="Saved Articles"></Section>,
-        <Section title={ "Search for a Movie to Begin"}></Section>
-{/* this.state.result[0] ||*/}
-
-        {/* <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p> */}
       </div>
     );
   }
