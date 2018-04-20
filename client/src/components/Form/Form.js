@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Form.css";
 import API from '../../utils/API';
 
-
 class Form extends Component {
   // Setting the component's initial state
   state = {
@@ -10,6 +9,7 @@ class Form extends Component {
     numRecords: "",
     startYear:"",
     endYear:"",
+    searchURL:"",
     result: [],
   };
 
@@ -30,30 +30,27 @@ class Form extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
    // numResults = $("#num-records-select").val();
-
-  //     // If the user provides a startYear -- the startYear will be included in the queryURL
-  // if (parseInt(startYear)) {
-  //   searchURL = searchURL + "&begin_date=" + startYear + "0101";
-  // }
-
-  // // If the user provides a startYear -- the endYear will be included in the queryURL
-  // if (parseInt(endYear)) {
-  //   searchURL = searchURL + "&end_date=" + endYear + "0101";
-  // }
-
-
 
 
     // Alert the user their first and last name, clear `this.state.topic` and `this.state.numRecords`, clearing the inputs
     //alert(`Hello ${this.state.topic} ${this.state.numRecords}`);
     this.setState({
       topic: "",
-      numRecords: "",
+      // numRecords: "",
       startYear: "",
       endYear: "",
     });
+
+
+    if (parseInt(this.state.startYear)) {
+      this.state.searchURL = this.state.searchURL + "&begin_date=" + this.state.startYear + "0101";
+    }
+    if (parseInt(this.state.endYear)) {
+      this.state.searchURL = this.state.searchURL + "&end_date=" + this.state.endYear + "0101";
+    }
+
+
 
     console.log(this.state);
     this.searchNYT(this.state.topic);
@@ -74,13 +71,13 @@ class Form extends Component {
             type="text"
             placeholder="Topic"
           />
-          <input
+          {/* <input
             value={this.state.numRecords}
             name="numRecords"
             onChange={this.handleInputChange}
             type="text"
             placeholder="Number of Records to Retrieve"
-          />
+          /> */}
           <input
             value={this.state.startYear}
             name="startYear"
@@ -100,7 +97,7 @@ class Form extends Component {
         </form>
         {this.state.result.map(result => {
             return (
-              <h2>{result.headline.main}</h2>
+              <h2 key={result.web_url}>{result.headline.main}</h2>
 
               // <Results
               //   key={result.web_url}
