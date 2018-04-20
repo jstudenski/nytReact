@@ -3,8 +3,6 @@ import "./Form.css";
 import API from '../../utils/API';
 
 
-
-
 class Form extends Component {
   // Setting the component's initial state
   state = {
@@ -15,22 +13,15 @@ class Form extends Component {
     result: [],
   };
 
-  // componentDidMount() {
-  //   this.searchNYT("spongebob");
-  // }
-
-  // searchNYT = query => {
-  //   API.search(query)
-  //     .then(res => this.setState({ result: res.data.response.docs }))
-  //     .catch(err => console.log(err));
-  // };
-
-
+  searchNYT = query => {
+    API.search(query)
+      .then(res => this.setState({ result: res.data.response.docs }))
+      .catch(err => console.log(err));
+  };
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
-
     // Updating the input's state
     this.setState({
       [name]: value
@@ -38,8 +29,22 @@ class Form extends Component {
   };
 
   handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
+
+   // numResults = $("#num-records-select").val();
+
+  //     // If the user provides a startYear -- the startYear will be included in the queryURL
+  // if (parseInt(startYear)) {
+  //   searchURL = searchURL + "&begin_date=" + startYear + "0101";
+  // }
+
+  // // If the user provides a startYear -- the endYear will be included in the queryURL
+  // if (parseInt(endYear)) {
+  //   searchURL = searchURL + "&end_date=" + endYear + "0101";
+  // }
+
+
+
 
     // Alert the user their first and last name, clear `this.state.topic` and `this.state.numRecords`, clearing the inputs
     //alert(`Hello ${this.state.topic} ${this.state.numRecords}`);
@@ -51,6 +56,7 @@ class Form extends Component {
     });
 
     console.log(this.state);
+    this.searchNYT(this.state.topic);
   };
 
   render() {
@@ -92,6 +98,18 @@ class Form extends Component {
 
           <button onClick={this.handleFormSubmit}>Submit</button>
         </form>
+        {this.state.result.map(result => {
+            return (
+              <h2>{result.headline.main}</h2>
+
+              // <Results
+              //   key={result.web_url}
+              //   title={result.headline.main}
+              //   href={result.web_url}
+              // />
+            );
+          })}
+          
       </div>
     );
   }
