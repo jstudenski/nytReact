@@ -24,39 +24,47 @@ class Form extends Component {
     // Updating the input's state
     this.setState({
       [name]: value
+    }, () => {
+      this.setState(
+        {searchURL: 
+          (this.state.topic)+
+          (this.state.startYear ? `&begin_date=${this.state.startYear}0101` : "")+
+          (this.state.endYear ? `&end_date=${this.state.endYear}0101` : "")
+        }
+      )
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
 
-    this.setState({
-      topic: "",
-      startYear: "",
-      endYear: "",
-    });
+    if (!this.state.topic) {
+      alert("Please add a topic!");
+    } else if (this.state.password.length < 6) {
+      alert(
+        `Choose a more secure password ${this.state.firstName} ${this.state
+          .lastName}`
+      );
+    } else {
+      console.log(this.state.searchURL)
+      this.searchNYT(this.state.searchURL);
+    }
 
-    if (parseInt(this.state.startYear)) {
-      this.setState({
-        searchURL: `${this.state.searchURL}&begin_date=${this.state.startYear}0101`
-      });
-      
-     // this.state.searchURL = `${this.state.searchURL}&begin_date=${this.state.startYear}0101`;
-    }
-    if (parseInt(this.state.endYear)) {
-      this.setState({
-        searchURL: `${this.state.searchURL}&end_date=${this.state.endYear}0101`
-      });
-    }
-    this.searchNYT(this.state.searchURL);
-    
+    // this.setState({
+    //   topic: "",
+    //   startYear: "",
+    //   endYear: "",
+    // });
+
+
+
   };
 
   render() {
     return (
       <div>
         <p>
-          Hello Topic:{this.state.topic} Num:{this.state.numRecords} Start:{this.state.startYear} End:{this.state.endYear}
+          Hello Topic:{this.state.topic} Num:{this.state.searchURL} Start:{this.state.startYear} End:{this.state.endYear}
         </p>
         <form className="form">
           <input
