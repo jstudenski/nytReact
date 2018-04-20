@@ -7,4 +7,5 @@
   width: 600px;
   text-align: left;
   border: 1px solid #999;
+  overflow: scroll;
 }
