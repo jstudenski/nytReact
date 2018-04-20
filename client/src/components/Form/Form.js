@@ -6,7 +6,6 @@ class Form extends Component {
   // Setting the component's initial state
   state = {
     topic: "",
-    // numRecords: "",
     startYear:"",
     endYear:"",
     searchURL:"",
@@ -30,33 +29,30 @@ class Form extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-   // numResults = $("#num-records-select").val();
 
-    // Alert the user their first and last name, clear `this.state.topic` and `this.state.numRecords`, clearing the inputs
-    //alert(`Hello ${this.state.topic} ${this.state.numRecords}`);
     this.setState({
       topic: "",
-      // numRecords: "",
       startYear: "",
       endYear: "",
     });
 
-
     if (parseInt(this.state.startYear)) {
-      this.state.searchURL = this.state.searchURL + "&begin_date=" + this.state.startYear + "0101";
+      this.setState({
+        searchURL: `${this.state.searchURL}&begin_date=${this.state.startYear}0101`
+      });
+      
+     // this.state.searchURL = `${this.state.searchURL}&begin_date=${this.state.startYear}0101`;
     }
     if (parseInt(this.state.endYear)) {
-      this.state.searchURL = this.state.searchURL + "&end_date=" + this.state.endYear + "0101";
+      this.setState({
+        searchURL: `${this.state.searchURL}&end_date=${this.state.endYear}0101`
+      });
     }
-
-
-
-    console.log(this.state);
-    this.searchNYT(this.state.topic);
+    this.searchNYT(this.state.searchURL);
+    
   };
 
   render() {
-    // Notice how each input has a `value`, `name`, and `onChange` prop
     return (
       <div>
         <p>
@@ -70,13 +66,6 @@ class Form extends Component {
             type="text"
             placeholder="Topic"
           />
-          {/* <input
-            value={this.state.numRecords}
-            name="numRecords"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Number of Records to Retrieve"
-          /> */}
           <input
             value={this.state.startYear}
             name="startYear"
@@ -96,6 +85,7 @@ class Form extends Component {
         </form>
         {this.state.result.map(result => {
             return (
+              "hi",
               <h2 key={result.web_url}>{result.headline.main}</h2>
 
               // <Results
