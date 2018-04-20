@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import "./Form.css";
+import API from '../../utils/API';
+
+
+
 
 class Form extends Component {
   // Setting the component's initial state
@@ -8,7 +12,20 @@ class Form extends Component {
     numRecords: "",
     startYear:"",
     endYear:"",
+    result: [],
   };
+
+  // componentDidMount() {
+  //   this.searchNYT("spongebob");
+  // }
+
+  // searchNYT = query => {
+  //   API.search(query)
+  //     .then(res => this.setState({ result: res.data.response.docs }))
+  //     .catch(err => console.log(err));
+  // };
+
+
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -32,6 +49,8 @@ class Form extends Component {
       startYear: "",
       endYear: "",
     });
+
+    console.log(this.state);
   };
 
   render() {

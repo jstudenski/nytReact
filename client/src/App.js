@@ -13,17 +13,16 @@ class App extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchMovies("matrix");
+    this.searchNYT("matrix");
   }
 
-  searchMovies = query => {
+  searchNYT = query => {
     API.search(query)
       .then(res => this.setState({ result: res.data.response.docs }))
       .catch(err => console.log(err));
   };
 
   render() {
-    console.log(this.state.result[0])
 
     return (
       <div className="App">
