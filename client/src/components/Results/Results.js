@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
 import './Results.css';
 
 const Results = props => (
   <div className="result-item">
     <a href={props.href} target="_blank">{props.title}</a>
-    <div className="save-btn">Save</div>
+    <RaisedButton label="Save" />
   </div>
 );
 
