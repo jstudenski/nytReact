@@ -5,11 +5,23 @@ import Form from './components/Form';
 import Results from './components/Results';
 
 class App extends Component {
+
+  state = {
+    result: [],
+    search: '',
+  };
+
+  myCallback = (dataFromChild) => {
+    this.setState({
+      result: dataFromChild
+    });
+  }
+
   render() {
-    this.state = {
-      result: [],
-      search: '',
-    };
+    // this.state = {
+    //   result: [],
+    //   search: '',
+    // };
 
     return (
       <div className="App">
@@ -17,7 +29,7 @@ class App extends Component {
           <h1 className="App-title">New York Times Search</h1>
         </header>
 
-        <Section title="Search"><Form /></Section>,
+        <Section title="Search"><Form callbackFromParent={this.myCallback} /></Section>,
         <Section title="Results">
           {this.state.result.map(result => (
             <Results

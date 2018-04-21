@@ -12,10 +12,19 @@ class Form extends Component {
     result: [],
   };
 
+  someFn = () => {
+    // [...somewhere in here I define a variable listInfo which    I think will be useful as data in my ToDoList component...]
+    this.props.callbackFromParent('test');
+  };
+
+
   searchNYT = query => {
     API.search(query)
-      .then(res => this.setState({ result: res.data.response.docs }))
+    //  .then(res => this.setState({ result: res.data.response.docs }))
+      .then(res => this.props.callbackFromParent(res.data.response.docs ))
       .catch(err => console.log(err));
+
+      
   };
 
   handleInputChange = event => {
@@ -33,39 +42,34 @@ class Form extends Component {
         }
       )
     });
+    
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-
+    // a few validations
     if (!this.state.topic) {
       alert("Please add a topic!");
-    } else if (this.state.password.length < 6) {
-      alert(
-        `Choose a more secure password ${this.state.firstName} ${this.state
-          .lastName}`
-      );
+    } else if (isNaN(this.state.startYear) || isNaN(this.state.endYear) ) {
+      alert("Years need to be numbers");
     } else {
-      console.log(this.state.searchURL)
+      // query API
       this.searchNYT(this.state.searchURL);
+      this.setState({
+        topic: "",
+        startYear: "",
+        endYear: "",
+      });
     }
-
-    // this.setState({
-    //   topic: "",
-    //   startYear: "",
-    //   endYear: "",
-    // });
-
-
-
   };
 
   render() {
     return (
       <div>
+        {/* display live
         <p>
           Hello Topic:{this.state.topic} Num:{this.state.searchURL} Start:{this.state.startYear} End:{this.state.endYear}
-        </p>
+        </p> */}
         <form className="form">
           <input
             value={this.state.topic}
@@ -93,9 +97,7 @@ class Form extends Component {
         </form>
         {this.state.result.map(result => {
             return (
-              "hi",
               <h2 key={result.web_url}>{result.headline.main}</h2>
-
               // <Results
               //   key={result.web_url}
               //   title={result.headline.main}

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import './Results.css';
 
 const Results = props => (
-  <div>
-    <h3>{props.title}</h3>
-    {props.href}
+  <div className="result-item">
     <a href={props.href} target="_blank">{props.title}</a>
+    <div className="save-btn">Save</div>
   </div>
 );
 
