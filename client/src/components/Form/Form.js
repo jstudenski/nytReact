@@ -67,10 +67,6 @@ class Form extends Component {
   render() {
     return (
       <div>
-        {/* display live
-        <p>
-          Hello Topic:{this.state.topic} Num:{this.state.searchURL} Start:{this.state.startYear} End:{this.state.endYear}
-        </p> */}
         <form className="form">
           <input
             value={this.state.topic}
@@ -100,11 +96,6 @@ class Form extends Component {
         {this.state.result.map(result => {
             return (
               <h2 key={result.web_url}>{result.headline.main}</h2>
-              // <Results
-              //   key={result.web_url}
-              //   title={result.headline.main}
-              //   href={result.web_url}
-              // />
             );
           })}
           
